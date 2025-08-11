@@ -2,14 +2,14 @@
 
 import { useQuery } from "@tanstack/react-query";
 import css from "./NotesPage.module.css";
-import SearchBox from "../components/SearchBox/SearchBox";
-import Pagination from "../components/Pagination/Pagination";
-import NoteList from "../components/NoteList/NoteList";
-import NoteModal from "../components/NoteModal/NoteModal";
-import NoteForm from "../components/NoteForm/NoteForm";
+import SearchBox from "../../components/SearchBox/SearchBox";
+import Pagination from "../../components/Pagination/Pagination";
+import NoteList from "../../components/NoteList/NoteList";
+import NoteModal from "../../components/NoteModal/NoteModal";
+import NoteForm from "../../components/NoteForm/NoteForm";
 import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { fetchNotes, NoteListResponse } from "../lib/api";
+import { fetchNotes, NoteListResponse } from "../../lib/api";
 import toast, { Toaster } from "react-hot-toast";
 
 

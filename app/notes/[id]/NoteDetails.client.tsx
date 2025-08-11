@@ -1,6 +1,6 @@
 "use client";
 
-import { getSingleNote } from "@/app/lib/api";
+import { getSingleNote } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from 'next/navigation';
 import css from './NoteDetails.module.css';

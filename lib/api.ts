@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Note } from "../types/note";
+import type { Note } from "../app/types/note";
 
 export interface NoteListParams  {
     page: number;
