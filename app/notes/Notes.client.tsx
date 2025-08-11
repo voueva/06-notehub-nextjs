@@ -13,7 +13,7 @@ import { fetchNotes, NoteListResponse } from "../../lib/api";
 import toast, { Toaster } from "react-hot-toast";
 
 
-const NotesPageClient = () => {
+const NotesClient = () => {
 	const [debouncedQuery, setDebouncedQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -70,4 +70,4 @@ const NotesPageClient = () => {
   );
 };
 
-export default NotesPageClient;
+export default NotesClient;
