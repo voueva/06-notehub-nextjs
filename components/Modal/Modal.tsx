@@ -8,7 +8,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-export default function NoteModal({ children, onClose }: ModalProps) {
+export default function Modal({ children, onClose }: ModalProps) {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

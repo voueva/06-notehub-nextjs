@@ -5,7 +5,7 @@ import css from "./NotesPage.module.css";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import Pagination from "../../components/Pagination/Pagination";
 import NoteList from "../../components/NoteList/NoteList";
-import NoteModal from "../../components/NoteModal/NoteModal";
+import Modal from "../../components/Modal/Modal";
 import NoteForm from "../../components/NoteForm/NoteForm";
 import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
@@ -62,9 +62,9 @@ const NotesPageClient = () => {
       <Toaster />
 
       {showModal && (
-        <NoteModal onClose={() => setShowModal(false)}>
+        <Modal onClose={() => setShowModal(false)}>
           <NoteForm onClose={() => setShowModal(false)} />
-        </NoteModal>
+        </Modal>
       )}
     </div>
   );
