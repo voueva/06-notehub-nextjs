@@ -12,50 +12,51 @@ import { useDebouncedCallback } from "use-debounce";
 import { fetchNotes, NoteListResponse } from "../../lib/api";
 import toast, { Toaster } from "react-hot-toast";
 
+interface NotesClientProps {
+  initialData: NoteListResponse;
+  initialQuery: string;
+  initialPage: number;
+}
 
-const NotesClient = () => {
-	const [debouncedQuery, setDebouncedQuery] = useState<string>('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [showModal, setShowModal] = useState<boolean>(false);
+const NotesClient = ({ initialData, initialQuery, initialPage }: NotesClientProps) => {
+  const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [showModal, setShowModal] = useState(false);
 
   const debouncedSearch = useDebouncedCallback((value: string) => {
     setDebouncedQuery(value);
     setCurrentPage(1);
   }, 500);
 
-  const {
-    data = { notes: [], totalPages: 0 } as NoteListResponse,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ['notes', debouncedQuery, currentPage],
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["notes", debouncedQuery, currentPage],
     queryFn: () => fetchNotes(debouncedQuery, currentPage),
-    placeholderData: (prevData) => prevData,
+    initialData,
+    placeholderData: (prev) => prev,
   });
 
   useEffect(() => {
     if (!isLoading && data.notes?.length === 0 && !isError) {
-      toast.error('No notes found for your request.');
+      toast.error("No notes found for your request.");
     }
   }, [data, isLoading, isError]);
 
   return (
     <div className={css.app}>
       <div className={css.toolbar}>
-        <SearchBox
-          onSearch={(value) => {
-            debouncedSearch(value);
-          }}
-        />
-        {
-          data.totalPages > 1 &&
+        <SearchBox onSearch={(value) => debouncedSearch(value)} />
+
+        {data.totalPages > 1 && (
           <Pagination
             totalPages={data.totalPages}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           />
-        }
-        <button className={css.button} onClick={() => setShowModal(true)}>Create note +</button>
+        )}
+
+        <button className={css.button} onClick={() => setShowModal(true)}>
+          Create note +
+        </button>
       </div>
 
       <NoteList notes={data.notes} />
